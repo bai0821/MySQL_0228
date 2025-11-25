@@ -77,19 +77,23 @@ insert into sc values ('s001','c007',78.9);
 insert into sc values ('s001','c010',78.9);
 
 -- 1.查詢學生表的 前10條資料
-
+select * from student limit 0,10;
 -- 2.查詢成績表所有成績的最低分,平均分,總分
-
+select min(score),avg(score),max(score) from sc;
 -- 3.查詢老師 “諶燕” 所帶的課程設數量
-
+select * from course,teacher;
+select tname 老師名稱,count(cno) 課程數量 from course join teacher using(tno) where tname = "諶燕";
 -- 4.查詢所有老師所帶 的課程 數量
-
+select tname 老師名稱,count(cno) 課堂數量 from course c left join teacher t on c.tno = t.tno group by tname;
 -- 5.查詢姓”張”的學生名單
-
+select * from student where sname like "張%";
 -- 6.查詢課程名稱為'Oracle'且分數低於60 的學號和分數
-
+select sc.sno, sc.score from course c join sc on c.cno = sc.cno where c.cname = "oracle" and sc.score < 60;
 -- 7.查詢所有學生的選課 課程名稱
-
+select * from student;
+select * from course;
+select * from sc;
+select sname 學生姓名, cno 選課, cname 課程名稱 from student s join score sc on s.sno = sc.sno join course on sc.cno = c.cno;
 -- 8.查詢任何一門課程成績在70 分以上的學生姓名.課程名稱和分數
 
 -- 9.查詢不及格的課程,並按課程號從大到小排列 學號,課程號,課程名,分數
